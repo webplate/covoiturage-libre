@@ -1,15 +1,15 @@
-city_list = [
-  ['Lyon', '69000', '69', 'xxx', 'fr', 45.759723, 4.842223, 1],
-  ['Paris', '75000', '75', 'xxx', 'fr', 48.856578, 2.351828, 1],
-  ['Angers', '49000', '49', 'xxx', 'fr', 47.47361, -0.55416, 1],
-  ['Lille', '59000', '59', 'xxx', 'fr', 50.637222, 3.063333, 1],
-  ['Toulouse', '31000', '31', 'xxx', 'fr', 43.604482, 1.443962, 1],
-  ['Marseille', '13001', '13', 'xxx', 'fr', 43.296346, 5.369889, 1]
-]
+fnames = Dir[Rails.root.join("db/seeds/json/*.json")]
 
-city_list.each do |name, postal_code, department, region, country_code, lat, lon, distance|
-  City.create(name: name, postal_code: postal_code, \
-              department: department, region: region, \
-              country_code: country_code, \
-              lat: lat, lon: lon, distance: distance)
+fnames.each do |fname|
+  cities = JSON.load File.new(fname)
+  cities.each do |city|
+    City.create(name: city['name'][0,50], \
+                postal_code: city['postal_code'], \
+                department: city['division_id'][0,2], \
+                region: city['division_main'][0,10], \
+                country_code: city['country_code'][0,2], \
+                lat: city['latitude'], \
+                lon: city['longitude'], \
+                distance: 1)
+  end
 end
