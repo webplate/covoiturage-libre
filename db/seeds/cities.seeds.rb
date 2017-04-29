@@ -3,7 +3,7 @@ fnames = Dir[Rails.root.join("db/seeds/json/*.json")]
 fnames.each do |fname|
   cities = JSON.load File.new(fname)
   cities.each do |city|
-    City.where(name: name, region: region).first_or_initialize.update(
+    City.where(name: city['name'], region: city['division_main'][0,10]).first_or_initialize.update(
       name: city['name'][0,50], \
       postal_code: city['postal_code'], \
       department: city['division_id'][0,2], \
