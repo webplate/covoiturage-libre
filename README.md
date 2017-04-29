@@ -8,6 +8,9 @@ You can find the repository for the Android app just [here](https://github.com/s
 
 There is a guide to install a [dev setup on Ubuntu](https://github.com/covoiturage-libre/covoiturage-libre/wiki/Dev-setup-on-Ubuntu).
 
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/covoiturage-libre/covoiturage-libre)
+[![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/covoiturage-libre/covoiturage-libre)
+
 ## Licence
 
  We are currently discussing under which license we want to publish the covoiturage-libre code. Any reuse of the code must go through a strong speech with the staff members, do not hesitate to open an "Issue" to discuss it. We want the widest federated Project as possible, avoiding forks that do not COMMUNICATE WITH US. (Thus, the proposed car-sharing will be better)
@@ -45,15 +48,13 @@ NB : a simple postgresql config file does the jobs. The adapter is `postgis` but
 
 * Database initialization
 
-Install postgis extension on your database :
+Enable PostGIS extension on your database via `bundle exec rake db:enable_postgis`.
 
-```
-user=> CREATE extension postgis;
-CREATE EXTENSION
-```
-Then you can run the migrations
+Then you can run the migrations with `bundle exec rake db:migrate`
 
-`bundle exec rake db:migrate`
+## Configuration
+
+[Configuration ENV variables](https://github.com/covoiturage-libre/covoiturage-libre/wiki/Configuration-ENV-variables)
 
 ## Static pages
 
